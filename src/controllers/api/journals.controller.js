@@ -1,4 +1,5 @@
 const getJournals = (req, res) => {
+  console.log(req.db);
   res.send('getJournals');
 };
 const getJournal = (req, res) => {
