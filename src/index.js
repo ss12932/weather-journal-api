@@ -1,6 +1,7 @@
 console.log('hello from index.js');
 //import express
 const express = require('express');
+const routes = require('./routes');
 // declare a port
 const PORT = process.env.PORT || 4000; //in react, defaults to port 3000. anything apart from 3000.
 //process.env will look into the process object in node.js, within process object, env field. will contain ALL environment variables exposed to node.js during runtime. What heroku will do, assign its own port and put it as environment variable in env. if doesnt exist, defaults to 4000.
@@ -9,10 +10,10 @@ const app = express();
 
 const foo = (req, res, next) => {
   //mutate req obj add new key in req obj set value as bar
-  req.foo = 'bar';
+  // req.foo = 'bar';
   //go next middleware in mw chain, call next() fn, if not call, req will get stuck forever in this mw fn. defualt timeout 30 secs. something is wrong etc.
 
-  req.token = 'bar'; //auth token example. mw powerful to break down and decouple logic.
+  // req.token = 'bar'; //auth token example. mw powerful to break down and decouple logic.
 
   next();
   //can have 100s of mws. can have many mws depending on application.
@@ -32,18 +33,15 @@ const foo = (req, res, next) => {
 app.use(express.json()); //how to add mw, we take app instance we just built. use fn called use, instruct app to use json mw is built in express package. express.json(). fn call will return a middleware for you and connect to app as first mw in chain of mws.
 app.use(express.urlencoded({ extended: true }));
 //pass in option object with extended = true. both standard middlewares in any express project. can add your own custom middleware. its just a function.
-app.use(foo);
+// app.use(foo);
+app.use(routes);
 
-app.get('/', (req, res) => {
-  console.log(req.foo);
-  res.send('Hello!');
-});
-//have registered route and controller function. see error cannot GET/ somethign wrong with routes, no route server that reqeust. either forgotten to connect to router.
+//have registered route and controller function. see error cannot GET/ somethign wrong with routes, no route server that request. either forgotten to connect to router.
 
 //listen for requests/start server
 //34:22
 app.listen(PORT, () => {
   console.log('Server running on http://localhost:${PORT} 🚀');
 });
-//after establish successful connection to designated PORT, will call this function. open port on lcoal machine, browser or client can access. can only make GET requests in url bar, want POST requests use postman.
+//after establish successful connection to designated PORT, will call this function. open port on local machine, browser or client can access. can only make GET requests in url bar, want POST requests use postman.
 //server accepting requests, but no routes at this present. make req to this endpoint do something. register a GET endpoint for /. when req made this endpoint, execute this function. function registered to specific route, is called controller function. this controller function will be triggered when end point reached.
