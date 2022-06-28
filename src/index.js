@@ -1,3 +1,5 @@
+require('dotenv').config();
+//place early as possible in app. this pkg will read env file, add all variables in process env obj.
 console.log('hello from index.js');
 //import express
 const express = require('express');
@@ -10,10 +12,10 @@ const init = async () => {
     const PORT = process.env.PORT || 4000; //in react, defaults to port 3000. anything apart from 3000.
     //process.env will look into the process object in node.js, within process object, env field. will contain ALL environment variables exposed to node.js during runtime. What heroku will do, assign its own port and put it as environment variable in env. if doesnt exist, defaults to 4000.
     const dbConfig = {
-      host: '127.0.0.1',
-      user: 'root',
-      password: '',
-      database: 'weather_journal_db',
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD, //not good practice, use npm pkg dotENV module. waht it does allows us to store environment file. .env file, step 1 install pkg, step 2 root dir add .env file, add .env.sample file as well. add your connection info into env file, wont be  tracked by git. wont push up this confidental info.  read by process.env like port.
+      database: process.env.DB_NAME,
     };
     //connect to db before create app instance. import mysql
     const db = await mysql2.createConnection(dbConfig);
@@ -68,3 +70,4 @@ const init = async () => {
   }
 };
 init();
+//1:58:53
