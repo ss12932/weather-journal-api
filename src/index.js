@@ -58,7 +58,7 @@ const init = async () => {
     //listen for requests/start server
     //34:22
     app.listen(PORT, () => {
-      console.log('Server running on http://localhost:${PORT} 🚀');
+      console.log(`Server running on http://localhost:${PORT} 🚀`);
     });
     //after establish successful connection to designated PORT, will call this function. open port on local machine, browser or client can access. can only make GET requests in url bar, want POST requests use postman.
     //server accepting requests, but no routes at this present. make req to this endpoint do something. register a GET endpoint for /. when req made this endpoint, execute this function. function registered to specific route, is called controller function. this controller function will be triggered when end point reached.
@@ -70,4 +70,4 @@ const init = async () => {
   }
 };
 init();
-//1:58:53
+//2:20:13

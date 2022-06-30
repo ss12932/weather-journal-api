@@ -17,6 +17,6 @@ router.put('/:id', updateJournal);
 router.delete('/:id', deleteJournal);
 
 //if connect to another router, .use, not end of routing table.
-router.use('/:id/cities', cities);
+router.use('/:journalId/cities', cities);
 
 module.exports = router;
