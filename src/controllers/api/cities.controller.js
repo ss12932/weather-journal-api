@@ -37,7 +37,7 @@ const addCityToJournal = async (req, res) => {
       ]
     );
 
-    res.json({
+    return res.json({
       success: true,
     });
     //if receive response createJournal, route works and controller is working as intended
