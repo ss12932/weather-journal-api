@@ -17,6 +17,7 @@ router.put('/:id', updateJournal);
 router.delete('/:id', deleteJournal);
 
 //if connect to another router, .use, not end of routing table.
+//not passing params from one router to another router. can access id here because its end get put and get. but we want router to pass id from parent router to child router. cities.js have id in journals.router.js and id in cities.router.js
 router.use('/:journalId/cities', cities);
 
 module.exports = router;

@@ -10,7 +10,7 @@ CREATE TABLE journals (
   imageURL VARCHAR(255) NOT NULL,
   startDate DATE,
   endDate DATE,
-  PRIMARY KEY(id)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE cities (
@@ -22,6 +22,6 @@ CREATE TABLE cities (
   windSpeed DECIMAL(8, 2) NOT NULL,
   weatherDescription VARCHAR(255) NOT NULL,
   countryCode VARCHAR(255) NOT NULL,
-  FOREIGN KEY (journalId) REFERENCES journals(id),
-  PRIMARY KEY(id)
+  FOREIGN KEY (journalId) REFERENCES journals(id) ON DELETE CASCADE,
+  PRIMARY KEY (id)
 );
