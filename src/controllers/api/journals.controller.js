@@ -54,8 +54,30 @@ const createJournal = async (req, res) => {
     });
   }
 };
-const updateJournal = (req, res) => {
-  res.send('updateJournal');
+const updateJournal = async (req, res) => {
+  try {
+    //extract payload, next make db request
+    const payLoad = req.body;
+    // console.log(payLoad);
+    const { id } = req.params;
+
+    await req.db.query('UPDATE journals SET title=?, imageUrl=? WHERE id=?', [
+      payLoad.name,
+      payLoad.imageUrl,
+      id,
+    ]);
+
+    res.json({
+      success: true,
+    });
+    //if receive response createJournal, route works and controller is working as intended
+  } catch (err) {
+    console.log(`[ERROR]: Failed to update Journal | ${err.message} `);
+    return res.status(500).json({
+      success: false,
+      error: 'Failed to update Journal',
+    });
+  }
 };
 const deleteJournal = async (req, res) => {
   try {
